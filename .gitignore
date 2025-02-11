@@ -1,0 +1,5 @@
+*.o
+*.a
+googletest/googletest/src
+googletest/lib
+TrieTests

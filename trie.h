@@ -12,6 +12,7 @@ February 4, 2025
 
 #include <string>
 #include <vector>
+#include <map>
 
 using std::string;
 using std::vector;
@@ -23,8 +24,8 @@ using std::vector;
 class Trie {
 private:
 
-    // array of pointers to trie nodes
-    Trie* branches[26];
+    // map that maps characters to Trie nodes 
+    std::map<char, Trie> branches;
     bool isCompleteWord;
 
     /**

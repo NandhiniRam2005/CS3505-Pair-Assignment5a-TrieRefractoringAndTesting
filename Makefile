@@ -2,21 +2,43 @@
 # involves googletest
 # By Eric Heisler
 # 2025-2-6
+
+
+# Compiler and Flags
 CC = g++
-CFLAGS = -Wall
-GOOGLETEST ?= ../googletest
+CFLAGS = -Wall -std=c++2a
 
-trieTests: trieTests.o trie.o
-	$(CC) $(CFLAGS) -o trieTests -I$(GOOGLETEST)/googletest/include -L$(GOOGLETEST)/lib trieTests.o trie.o -lgtest -lgtest_main
+# GoogleTest Path (can be overridden via command line)
+GOOGLETEST ?= googletest
 
-trieTests.o: trieTests.cpp trie.h
-	$(CC) $(CFLAGS) -c trieTests.cpp
+# Paths to GoogleTest headers and libraries
+GTEST_INCLUDE = $(GOOGLETEST)/googletest/include
+GTEST_LIB = $(GOOGLETEST)/lib
 
+# Source and Object Files
+SRC = trie.cpp trieTests.cpp
+OBJ = trie.o trieTests.o
+TARGET = TrieTests
+
+# Default target to build everything
+all: $(TARGET)
+
+# Build the test executable
+$(TARGET): $(OBJ)
+	$(CC) $(CFLAGS) -I$(GTEST_INCLUDE) -L$(GTEST_LIB) $(OBJ) -lgtest -lgtest_main -pthread -o $(TARGET)
+
+# Compile trie implementation
 trie.o: trie.cpp trie.h
 	$(CC) $(CFLAGS) -c trie.cpp
 
-test: trieTest
-	./trieTest
+# Compile test file
+trieTests.o: trieTests.cpp trie.h
+	$(CC) $(CFLAGS) -I$(GTEST_INCLUDE) -c trieTests.cpp
 
+# Run the tests
+test: $(TARGET)
+	./$(TARGET)
+
+# Clean up build files
 clean:
-	rm -f trieTest *.o
+	rm -f $(TARGET) *.o
