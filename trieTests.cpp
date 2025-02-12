@@ -3,13 +3,11 @@
 #include <vector>
 using namespace std;
 
-
 TEST(TrieTest, AddWord) {
     Trie trie;
     trie.addWord("hello");
-    EXPECT_TRUE(trie.isWord("hello"));  
+    EXPECT_TRUE(trie.isWord("hello"));
 }
-
 
 TEST(TrieTest, IsWordFalseInEmptyTrie) {
     Trie trie;

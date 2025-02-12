@@ -16,6 +16,7 @@ February 4, 2025
 
 using std::string;
 using std::vector;
+using std::map;
 
 /**
  * The trie class is represented as a C-style array of pointers to trie nodes with various 
@@ -25,7 +26,7 @@ class Trie {
 private:
 
     // map that maps characters to Trie nodes 
-    std::map<char, Trie> branches;
+    map<char, Trie> branches;
     bool isCompleteWord;
 
     /**
