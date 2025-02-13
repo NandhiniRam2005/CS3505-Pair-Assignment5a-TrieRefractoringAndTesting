@@ -55,6 +55,11 @@ private:
      */
     void getWords(const Trie* node, string prefix, vector<string>& words) const;
 
+    /**
+     * Private helper method that ensures all characters are a-z inclusive
+     * 
+     * @param word - the string being checked
+     */
     bool isValidWord(const string& word) const;
 
 public:
@@ -63,11 +68,6 @@ public:
      * marks the node as an incomplete word, by setting its flag to false.
      */
     Trie();
-
-    /**
-     *  Destructor deletes all dynamically allocated Trie nodes.
-     */
-    ~Trie();
 
     /**
      * Copy constructor that allocates new memeory for a new trie with the same instance variables as this trie.

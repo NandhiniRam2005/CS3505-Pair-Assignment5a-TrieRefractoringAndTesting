@@ -1,6 +1,19 @@
+/**
+ * This file is the cpp that tests the Trie class' implementation.
+ * It tests all the methods in Trie, including edge cases
+ * 
+ * By Nandhini Ramanathan and Ishan Sharma
+ * February 13, 2025
+ */
 #include "trie.h"
 #include <gtest/gtest.h>
 
+/**
+ * Private helper method that checks if 2 vectors contain only same strings and are the same length
+ * 
+ * @param firstVector - First string vector being checked
+ * @param secondVector - Second string vector being checked
+ */
 bool IsEqualVector(vector<string> firstVector, vector<string> secondVector) {
     if (firstVector.size() != secondVector.size()){
         return false;
@@ -19,20 +32,20 @@ bool IsEqualVector(vector<string> firstVector, vector<string> secondVector) {
 TEST(TrieTest, AddOneWordIsWordTrue) {
     Trie trie;
     trie.addWord("hello");
-    EXPECT_TRUE(trie.isWord("hello"));
+    EXPECT_TRUE(trie.isWord("hello")) << "Tried testing addWord with just one word 'hello' and isWord returned false";
 }
 
 TEST(TrieTest, AddOneWordIsWordFalse) {
     Trie trie;
     trie.addWord("hello");
-    EXPECT_FALSE(trie.isWord("hell"));
+    EXPECT_FALSE(trie.isWord("hell")) << "Tried testing addWord with just one word 'hello' and isWord('hell') returned true";
 }
 
 TEST(TrieTest, AddDuplicateWordIsWordTrue) {
     Trie trie;
     trie.addWord("hello");
     trie.addWord("hello");
-    EXPECT_TRUE(trie.isWord("hello"));
+    EXPECT_TRUE(trie.isWord("hello")) << "Tried testing addWord('hello') twice and isWord('hello') returned false";
 }
 
 TEST(TrieTest, AddMultipleWordsIsWordsTrue) {
@@ -43,14 +56,14 @@ TEST(TrieTest, AddMultipleWordsIsWordsTrue) {
     trie.addWord("bike");
     trie.addWord("shoes");
     trie.addWord("laptop");
-    EXPECT_TRUE(trie.isWord("hello"));
-    EXPECT_TRUE(trie.isWord("hi"));
-    EXPECT_TRUE(trie.isWord("car"));
-    EXPECT_TRUE(trie.isWord("bike"));
-    EXPECT_TRUE(trie.isWord("shoes"));
-    EXPECT_TRUE(trie.isWord("laptop"));
+    EXPECT_TRUE(trie.isWord("hello")) << "Tried testing addWord('hello') and isWord('hello') returned false";
+    EXPECT_TRUE(trie.isWord("hi")) << "Tried testing addWord('hi') and isWord('hi') returned false";
+    EXPECT_TRUE(trie.isWord("car")) << "Tried testing addWord('car') and isWord('car') returned false";
+    EXPECT_TRUE(trie.isWord("bike")) << "Tried testing addWord('bike') and isWord('bike') returned false";
+    EXPECT_TRUE(trie.isWord("shoes")) << "Tried testing addWord('shoes') and isWord('shoes') returned false";
+    EXPECT_TRUE(trie.isWord("laptop")) << "Tried testing addWord('laptop') and isWord('laptop') returned false";
 
-    EXPECT_FALSE(trie.isWord("monkey"));
+    EXPECT_FALSE(trie.isWord("monkey")) << "Tried testing isWord('monkey') in a trie with multiple words but not monkey and it returned true";
 }
 
 TEST(TrieTest, AddWordsWithSamePrefixIsWordTrue) {
@@ -61,18 +74,18 @@ TEST(TrieTest, AddWordsWithSamePrefixIsWordTrue) {
     vector<string> expected = {"cats", "catastrophe"};
     vector<string> actual = trie.allWordsStartingWithPrefix("cat");
 
-    EXPECT_TRUE(IsEqualVector(expected, actual));                   
+    EXPECT_TRUE(IsEqualVector(expected, actual)) << "Tried testing allWordsStartingWithPrefix('cat') in a trie with 'cats' and a 'catastrophe' and it returned false";                   
 }
 
 TEST(TrieTest, IsWordFalseInEmptyTrie) {
     Trie trie;
-    EXPECT_FALSE(trie.isWord("hello"));  
+    EXPECT_FALSE(trie.isWord("hello")) << "Tried testing isWord('hello') in an empty trie and it returned true";
 }
 
 TEST(TrieTest, IsTrueOneLetterWord) {
     Trie trie;
     trie.addWord("u");
-    EXPECT_TRUE(trie.isWord("u"));  
+    EXPECT_TRUE(trie.isWord("u")) << "Tried testing one letter input isWord('u') and it returned false";
 }
 
 TEST(TrieTest, IsWordIncompleteVersionsofAddedWord) {
@@ -80,8 +93,8 @@ TEST(TrieTest, IsWordIncompleteVersionsofAddedWord) {
     trie.addWord("positivity");
     trie.addWord("positive");
     trie.addWord("posit");
-    EXPECT_TRUE(trie.isWord("positivity"));  
-    EXPECT_FALSE(trie.isWord("pos"));
+    EXPECT_TRUE(trie.isWord("positivity")) << "Tried testing isWord('positivity') in a trie with 'positivity', 'positive', and 'posit' and it returned false";  
+    EXPECT_FALSE(trie.isWord("pos")) << "Tried testing isWord('pos') in a trie with 'positivity', 'positive', and 'posit' and it returned true";
 }
 
 TEST(TrieTest, AllWordsStartingWithPrefixSameWord) {
@@ -91,7 +104,7 @@ TEST(TrieTest, AllWordsStartingWithPrefixSameWord) {
     vector<string> expected = {"car"};
     vector<string> actual = trie.allWordsStartingWithPrefix("car");
 
-    EXPECT_TRUE(IsEqualVector(expected, actual));         
+    EXPECT_TRUE(IsEqualVector(expected, actual)) << "Tried testing allWordsStartingWithPrefix('car') in a trie with 'car' and it failed";         
 }
 
 TEST(TrieTest, AllWordsStartingWithPrefixNormalCaseMultipleWords) {
@@ -106,7 +119,7 @@ TEST(TrieTest, AllWordsStartingWithPrefixNormalCaseMultipleWords) {
     vector<string> expected = {"cats", "cat", "catra", "cater", "catering", "caty"};
     vector<string> actual = trie.allWordsStartingWithPrefix("cat");
 
-    EXPECT_TRUE(IsEqualVector(expected, actual));   
+    EXPECT_TRUE(IsEqualVector(expected, actual)) << "Tried testing allWordsStartingWithPrefix('cat') in a trie with 'cats', 'cat', 'catra', 'cater', 'catering', and 'caty' and it failed";   
 }
 
 TEST(TrieTest, AllWordsStartingWithPrefixSomeAreFalse) {
@@ -122,7 +135,7 @@ TEST(TrieTest, AllWordsStartingWithPrefixSomeAreFalse) {
     vector<string> expected = {"cats", "cat", "catra", "cater"};
     vector<string> actual = trie.allWordsStartingWithPrefix("cat");
 
-    EXPECT_TRUE(IsEqualVector(expected, actual));        
+    EXPECT_TRUE(IsEqualVector(expected, actual)) << "Tried testing allWordsStartingWithPrefix('cat') in a trie with 'cats', 'cat', 'catra', 'cater', 'car', 'c', and 'a' and it failed";
 }
 
 TEST(TrieTest, AllWordsStartingWithOneWordPrefix) {   
@@ -140,20 +153,20 @@ TEST(TrieTest, AllWordsStartingWithOneWordPrefix) {
     vector<string> expected = {"cats", "cat", "catra", "cater", "car", "c", "case", "cocktail"};
     vector<string> actual = trie.allWordsStartingWithPrefix("c");
 
-    EXPECT_TRUE(IsEqualVector(expected, actual));        
+    EXPECT_TRUE(IsEqualVector(expected, actual)) << "Tried testing allWordsStartingWithPrefix('c') in a trie with 'cats', 'cat', 'catra', 'cater', 'car', 'c', 'case', 'cocktail', and 'a' and it failed";
 }
 
 TEST(TrieTest, IsWordNotAtoZ) {
     Trie trie;
     trie.addWord("car1");
              
-    EXPECT_FALSE(trie.isWord("car1"));          
+    EXPECT_FALSE(trie.isWord("car1")) << "Tried testing isWord('car1') in a trie with 'car1' and it returned true";
 }
 
 TEST(TrieTest, IsWordWeirdCharacters) {      
     Trie trie;
     trie.addWord("paper");
-    EXPECT_FALSE(trie.isWord("p@p$^"));
+    EXPECT_FALSE(trie.isWord("p@p$^")) << "Tried testing isWord('p@p$^') in a trie with 'paper' and it returned true";
 }
 
 TEST(TrieTest, StartWithPrefixNotAtoZ) {
@@ -163,7 +176,7 @@ TEST(TrieTest, StartWithPrefixNotAtoZ) {
     vector<string> expected = {};
     vector<string> actual = trie.allWordsStartingWithPrefix("car1");
 
-    EXPECT_TRUE(IsEqualVector(expected, actual));
+    EXPECT_TRUE(IsEqualVector(expected, actual)) << "Tried testing addWord with just one word 'hello' and isWord('hell') returned true";
 }
 
 TEST(TrieTest, StartWithPrefixWeirdCharacters) {
@@ -173,7 +186,7 @@ TEST(TrieTest, StartWithPrefixWeirdCharacters) {
     vector<string> expected = {};
     vector<string> actual = trie.allWordsStartingWithPrefix("p@p$^");
 
-    EXPECT_TRUE(IsEqualVector(expected, actual));
+    EXPECT_TRUE(IsEqualVector(expected, actual)) << "Tried testing allWordsStartingWithPrefix('p@p$^') in a trie with 'paper' and it failed";
 }
 
 TEST(TrieTest, PrefixNotAtoZCapitalLetters) {
@@ -183,14 +196,14 @@ TEST(TrieTest, PrefixNotAtoZCapitalLetters) {
     vector<string> expected = {};
     vector<string> actual = trie.allWordsStartingWithPrefix("PAPER");
 
-    EXPECT_TRUE(IsEqualVector(expected, actual));
+    EXPECT_TRUE(IsEqualVector(expected, actual)) << "Tried testing allWordsStartingWithPrefix('PAPER') in a trie with 'paper' and it failed";
 }
 
 TEST(TrieTest, IsWordNotAtoZCapitalLetters) {
     Trie trie;
     trie.addWord("paper");
 
-    EXPECT_FALSE(trie.isWord("PAPER"));    
+    EXPECT_FALSE(trie.isWord("PAPER")) << "Tried testing isWord('PAPER') in a trie with 'paper' and it returned true";
 }
 
 TEST(TrieTest, IsWordBoundaryCasesAAndZ) {  
@@ -198,8 +211,8 @@ TEST(TrieTest, IsWordBoundaryCasesAAndZ) {
     trie.addWord("apple");
     trie.addWord("zebra");
 
-    EXPECT_FALSE(trie.isWord("Apple"));
-    EXPECT_FALSE(trie.isWord("Zebra"));
+    EXPECT_FALSE(trie.isWord("Apple")) << "Tried testing isWord('Apple') in a trie with 'apple' and 'zebra' and it returned true";
+    EXPECT_FALSE(trie.isWord("Zebra")) << "Tried testing isWord('Zebra') in a trie with 'apple' and 'zebra' and it returned true";
 }
 
 TEST(TrieTest, IsWordBoundaryCasesBAndY) { 
@@ -207,17 +220,17 @@ TEST(TrieTest, IsWordBoundaryCasesBAndY) {
     trie.addWord("bat");
     trie.addWord("yo");
 
-    EXPECT_FALSE(trie.isWord("Bat"));
-    EXPECT_FALSE(trie.isWord("Yo"));
+    EXPECT_FALSE(trie.isWord("Bat")) << "Tried testing isWord('Bat') in a trie with 'bat' and 'yo' and it returned true";
+    EXPECT_FALSE(trie.isWord("Yo")) << "Tried testing isWord('Yo') in a trie with 'bat' and 'yo' and it returned true";
 }
 
 TEST(TrieTest, IsWordEdgeCasesAsciiValueRightBeforeAAndZ) {
     Trie trie;
     trie.addWord("ace");
-    trie.addWord("moon");
+    trie.addWord("zoom");
 
-    EXPECT_FALSE(trie.isWord("`"));
-    EXPECT_FALSE(trie.isWord("{"));
+    EXPECT_FALSE(trie.isWord("`")) << "Tried testing isWord('`') in a trie with 'ace' and 'zoom' and it returned true";
+    EXPECT_FALSE(trie.isWord("{")) << "Tried testing isWord('{') in a trie with 'ace' and 'zoom' and it returned true";
 }
 
 TEST(TrieTest, StartPrefixBoundaryCasesAAndZ) {     
@@ -229,8 +242,8 @@ TEST(TrieTest, StartPrefixBoundaryCasesAAndZ) {
     vector<string> actual1 = trie.allWordsStartingWithPrefix("App");
     vector<string> actual2 = trie.allWordsStartingWithPrefix("Ze");
 
-    EXPECT_EQ(expected, actual1);
-    EXPECT_EQ(expected, actual2);
+    EXPECT_EQ(expected, actual1) << "Tried testing if allWordsStartingWithPrefix('App') in a trie with 'apple' and 'zebra' was empty and it failed";
+    EXPECT_EQ(expected, actual2) << "Tried testing if allWordsStartingWithPrefix('Ze') in a trie with 'apple' and 'zebra' was empty and it failed";
 }
 
 TEST(TrieTest, StartPrefixBoundaryCasesBAndY) {     
@@ -242,21 +255,21 @@ TEST(TrieTest, StartPrefixBoundaryCasesBAndY) {
     vector<string> actual1 = trie.allWordsStartingWithPrefix("Ban");
     vector<string> actual2 = trie.allWordsStartingWithPrefix("Yo");
 
-    EXPECT_EQ(expected, actual1);
-    EXPECT_EQ(expected, actual2);
+    EXPECT_EQ(expected, actual1) << "Tried testing if allWordsStartingWithPrefix('Ban') in a trie with 'banana' and 'yolo' was empty and it failed";
+    EXPECT_EQ(expected, actual2) << "Tried testing if allWordsStartingWithPrefix('Yo') in a trie with 'banana' and 'yolo' was empty and it failed";
 }
 
 TEST(TrieTest, StartPrefixEdgeCasesAsciiValueRightBeforeAAndZ) {     
     Trie trie;
     trie.addWord("ace");
-    trie.addWord("moon");
+    trie.addWord("zoom");
 
     vector<string> expected = {};
     vector<string> actual1 = trie.allWordsStartingWithPrefix("`");
     vector<string> actual2 = trie.allWordsStartingWithPrefix("{");
 
-    EXPECT_EQ(expected, actual1);
-    EXPECT_EQ(expected, actual2);
+    EXPECT_EQ(expected, actual1) << "Tried testing if allWordsStartingWithPrefix('`') in a trie with 'ace' and 'zoom' was empty and it failed";
+    EXPECT_EQ(expected, actual2) << "Tried testing if allWordsStartingWithPrefix('{') in a trie with 'ace' and 'zoom' was empty and it failed";
 }
 
 TEST(TrieTest, StartWithPrefixNotAtoZCapitalLetters) {    
@@ -266,7 +279,7 @@ TEST(TrieTest, StartWithPrefixNotAtoZCapitalLetters) {
     vector<string> expected = {};
     vector<string> actual = trie.allWordsStartingWithPrefix("Pap");
 
-    EXPECT_EQ(expected, actual);
+    EXPECT_EQ(expected, actual) << "Tried testing allWordsStartingWithPrefix('Pap') in a trie with 'paper' and it failed";
 }
 
 TEST(TrieTest, StartWithPrefixNotAtoZEmptyStringGetAllWords) {   
@@ -284,7 +297,7 @@ TEST(TrieTest, StartWithPrefixNotAtoZEmptyStringGetAllWords) {
     vector<string> expected = {"cats", "cat", "catra", "cater", "car", "c", "case", "cocktail", "a"};
     vector<string> actual = trie.allWordsStartingWithPrefix("");
 
-    EXPECT_TRUE(IsEqualVector(expected, actual));  
+    EXPECT_TRUE(IsEqualVector(expected, actual)) << "Tried testing allWordsStartingWithPrefix('') in a trie with 'cats', 'cat', 'catra', 'cater', 'car', 'c', 'case', 'cocktail', and 'a' and it failed";
 }
 
 TEST(TrieTest, PrefixdNotAtoZEmptyVector) {       
@@ -293,7 +306,7 @@ TEST(TrieTest, PrefixdNotAtoZEmptyVector) {
     vector<string> expected = {};
     vector<string> actual = trie.allWordsStartingWithPrefix("");
 
-    EXPECT_TRUE(IsEqualVector(expected, actual));  
+    EXPECT_TRUE(IsEqualVector(expected, actual)) << "Tried testing allWordsStartingWithPrefix('') in an empty trie and it failed";  
 }
 
 TEST(TrieTest, StartWithPrefixTrue) {
@@ -303,7 +316,7 @@ TEST(TrieTest, StartWithPrefixTrue) {
     vector<string> expected = {"cats"};
     vector<string> actual = trie.allWordsStartingWithPrefix("cat");
              
-    EXPECT_TRUE(IsEqualVector(expected, actual));
+    EXPECT_TRUE(IsEqualVector(expected, actual)) << "Tried testing allWordsStartingWithPrefix('cat') in a trie with 'cats' and it failed";
 }
 
 TEST(TrieTest, StartWithPrefixNotIncludedEmptyVector) {
@@ -313,7 +326,7 @@ TEST(TrieTest, StartWithPrefixNotIncludedEmptyVector) {
     vector<string> expected = {};
     vector<string> actual = trie.allWordsStartingWithPrefix("cats");
     
-    EXPECT_TRUE(IsEqualVector(expected, actual));
+    EXPECT_TRUE(IsEqualVector(expected, actual)) << "Tried testing allWordsStartingWithPrefix('cats') in a trie with 'cat' and it failed";
 }
 
 TEST(TrieTest, CopyConstructorIsWordTrue) {
@@ -328,7 +341,7 @@ TEST(TrieTest, CopyConstructorIsWordTrue) {
     vector<string> expected = {"cats", "cat"};
     vector<string> actual = trie2.allWordsStartingWithPrefix("cat");
     
-    EXPECT_TRUE(IsEqualVector(expected, actual));
+    EXPECT_TRUE(IsEqualVector(expected, actual)) << "Tried testing copy constructor, trie2 contained changes made to trie1";
 }
 
 TEST(TrieTest, CopyConstructorEmptyTrie) {
@@ -340,8 +353,8 @@ TEST(TrieTest, CopyConstructorEmptyTrie) {
     vector<string> actual1 = trie1.allWordsStartingWithPrefix("");
     vector<string> actual2 = trie2.allWordsStartingWithPrefix("");
     
-    EXPECT_TRUE(IsEqualVector(expected, actual1));
-    EXPECT_TRUE(IsEqualVector(expected, actual2));
+    EXPECT_TRUE(IsEqualVector(expected, actual1)) << "Tried testing copy constructor, trie1 lost data";
+    EXPECT_TRUE(IsEqualVector(expected, actual2)) << "Tried testing copy constructor, trie2 coudln't copy empty";
 }
 
 TEST(TrieTest, CopyConstructorIsWordFalse) {
@@ -356,7 +369,7 @@ TEST(TrieTest, CopyConstructorIsWordFalse) {
     vector<string> expected = {"cats", "cat"};
     vector<string> actual = trie2.allWordsStartingWithPrefix("cat");
     
-    EXPECT_FALSE(IsEqualVector(expected, actual));
+    EXPECT_FALSE(IsEqualVector(expected, actual)) << "Tried testing copy constructor, trie1 contained changes made to trie2";
 }
 
 TEST(TrieTest, AssignmentOperatorIsWordTrue) {
@@ -372,7 +385,7 @@ TEST(TrieTest, AssignmentOperatorIsWordTrue) {
     vector<string> expected = {"cats", "cat"};
     vector<string> actual = trie2.allWordsStartingWithPrefix("cat");
     
-    EXPECT_TRUE(IsEqualVector(expected, actual));
+    EXPECT_TRUE(IsEqualVector(expected, actual)) << "Tried testing allWordsStartingWithPrefix('cat') in a trie with 'cats', 'cat', and 'cater' and it failed";
 }
 
 TEST(TrieTest, AssignmentOperatorEmptyTrie) {
@@ -385,8 +398,8 @@ TEST(TrieTest, AssignmentOperatorEmptyTrie) {
     vector<string> actual1 = trie1.allWordsStartingWithPrefix("");
     vector<string> actual2 = trie2.allWordsStartingWithPrefix("");
     
-    EXPECT_TRUE(IsEqualVector(expected, actual1));
-    EXPECT_TRUE(IsEqualVector(expected, actual2));
+    EXPECT_TRUE(IsEqualVector(expected, actual1)) << "Tried testing allWordsStartingWithPrefix('') in an empty trie and it failed";
+    EXPECT_TRUE(IsEqualVector(expected, actual2)) << "Tried testing allWordsStartingWithPrefix('') in an empty trie and it failed";
 }
 
 TEST(TrieTest, AssignmentOperatorIsWordFalse) {
@@ -399,5 +412,5 @@ TEST(TrieTest, AssignmentOperatorIsWordFalse) {
 
     trie1.addWord("cater");
 
-    EXPECT_FALSE(trie2.isWord("cater"));
+    EXPECT_FALSE(trie2.isWord("cater")) << "Tried testing isWord('cater') in a trie with 'cats', 'cat', and 'cater' and it returned true";
 }

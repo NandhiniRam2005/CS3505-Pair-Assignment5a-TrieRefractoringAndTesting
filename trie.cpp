@@ -3,8 +3,8 @@ This file is the cpp that contains the Trie class' method implementation.
 The Trie class has methods to add words, lookup words, and find words with the same prefix 
 in the trie.
 
-By Nandhini Ramanathan
-February 4, 2025
+By Nandhini Ramanathan and Ishan Sharma
+February 13, 2025
 */
 
 #include "trie.h"
@@ -14,15 +14,6 @@ using std::swap;
 // Constructor
 Trie::Trie() {
     isCompleteWord = false;
-}
-
-// Destructor
-Trie::~Trie() {
-    // for (int i = 0; i < 26; i++) {
-    //     if (!branches.contains((char)('a' + i))) {
-    //         delete branches[(char) (i + 'a')];
-    //     }
-    // }
 }
 
 // Copy contrsuctor
@@ -108,6 +99,7 @@ vector<string> Trie::allWordsStartingWithPrefixRecursive(const string& prefix) c
     return words;
 }
 
+// Private helper to test if a word is valid
 bool Trie::isValidWord(const string& word) const{
     for (char character : word) {
         if (character < 'a' || character > 'z') {
