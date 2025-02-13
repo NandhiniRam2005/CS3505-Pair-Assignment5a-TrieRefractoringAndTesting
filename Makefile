@@ -3,7 +3,7 @@
 
 CC = g++
 CFLAGS = -Wall -std=c++2a
-GOOGLETEST ?= /root/cs3505/cs3505-assignment5a-NandhiniRam2005/googletest
+GOOGLETEST ?= /root/cs3505/assignment5/cs3505-assignment5a-NandhiniRam2005/googletest
 
 TrieTests: trieTests.o trie.o
 	$(CC) $(CFLAGS) -L$(GOOGLETEST)/lib -o TrieTests trieTests.o trie.o -lgtest -lgtest_main -pthread
