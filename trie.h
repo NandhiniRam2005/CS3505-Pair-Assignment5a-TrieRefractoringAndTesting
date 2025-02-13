@@ -55,6 +55,8 @@ private:
      */
     void getWords(const Trie* node, string prefix, vector<string>& words) const;
 
+    bool isValidWord(const string& word) const;
+
 public:
     /**
      * Default contstructor for the trie class that initializes all branches to nullptr and 

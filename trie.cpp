@@ -18,11 +18,11 @@ Trie::Trie() {
 
 // Destructor
 Trie::~Trie() {
-    for (int i = 0; i < 26; i++) {
-        if (!branches.contains((char)('a' + i))) {
-            delete branches[(char) (i + 'a')];
-        }
-    }
+    // for (int i = 0; i < 26; i++) {
+    //     if (!branches.contains((char)('a' + i))) {
+    //         delete branches[(char) (i + 'a')];
+    //     }
+    // }
 }
 
 // Copy contrsuctor
@@ -47,20 +47,18 @@ void Trie::addWord(const string& word) {
         return;
     }
 
-    if (!branches.contains(word[0])) {
-        branches[word[0]] = new Trie();
+    if (branches.find(word[0]) == branches.end()) {
+        branches[word[0]] = Trie();
     }
 
     // Passes the remaining wird recursively (skipping the current character (0) processed)
-    branches[word[0]]->addWord(word.substr(1));
+    branches[word[0]].addWord(word.substr(1));
 }
 
 // Is Word Driver
 bool Trie::isWord(const string& word) const {
-    for (char character : word) {
-        if (character < 'a' || character > 'z') {
-            return false;
-        }
+    if (!isValidWord(word)) {
+        return false;
     }
 
     return isWordRecursive(word);
@@ -72,20 +70,19 @@ bool Trie::isWordRecursive(const string& word) const {
         return isCompleteWord;
     }
 
-     if (!branches.contains(word[0])) {
-        branches[word[0]] = new Trie();
+    auto branchEntry = branches.find(word[0]);
+    if (branchEntry == branches.end()) {
+        return false;
     }
 
-    // Passes the remaining wird recursively (skipping the current character (0) processed)
-    branches[word[0]]->isWordRecursive(word.substr(1));
+    // Passes the remaining word recursively (skipping the current character (0) processed)
+    return branchEntry->second.isWordRecursive(word.substr(1));
 }
 
 // allWordsStartingWithPrefix Driver
 vector<string> Trie::allWordsStartingWithPrefix(const string& prefix) const {
-     for (char character : prefix) {
-        if (character < 'a' || character > 'z') {
-            return {};
-        }
+    if (!isValidWord(prefix)) {
+        return {};
     }
 
     return allWordsStartingWithPrefixRecursive(prefix);
@@ -95,11 +92,14 @@ vector<string> Trie::allWordsStartingWithPrefix(const string& prefix) const {
 vector<string> Trie::allWordsStartingWithPrefixRecursive(const string& prefix) const {
     const Trie* currentNode = this;
     for (char character : prefix) {
+
+        auto branchEntry = currentNode->branches.find(character);
+
         // Determine the index for the current character ('a' = 0 to 'z' = 25)
-        if (!currentNode->branches[character]) {
+        if (branchEntry == branches.end()) {
             return {};
         }
-        currentNode = currentNode->branches[character];
+        currentNode = &branchEntry->second;
     }
 
     // Collect words from the last node of the prefix till a isCompleteWord flag
@@ -108,18 +108,23 @@ vector<string> Trie::allWordsStartingWithPrefixRecursive(const string& prefix) c
     return words;
 }
 
+bool Trie::isValidWord(const string& word) const{
+    for (char character : word) {
+        if (character < 'a' || character > 'z') {
+            return false;
+        }
+    }
+
+    return true;
+}
+
 // Private helper get words
 void Trie::getWords(const Trie* node, string prefix, vector<string>& words) const {
     if (node->isCompleteWord) {
         words.push_back(prefix);
     }
 
-    for (int i = 0; i < 26; i++) {
-        // Convert index back to character
-        char characterAtIndex = char('a' + i);
-
-        if (node->branches.contains(characterAtIndex)) {
-            getWords(node->branches[characterAtIndex], prefix + characterAtIndex, words);
-        }
+    for (auto branchEntry : node->branches) {
+        getWords(&branchEntry.second, prefix + branchEntry.first, words);
     }
 }
