@@ -1,7 +1,7 @@
 /*
 This file is the cpp that contains the Trie class' method implementation.
 The Trie class has methods to add words, lookup words, and find words with the same prefix 
-in the trie, made of a map with character keys and Trie values.
+in the trie, made of a map with character keys and Trie values. 
 
 By Nandhini Ramanathan and Ishan Sharma
 February 17, 2025
