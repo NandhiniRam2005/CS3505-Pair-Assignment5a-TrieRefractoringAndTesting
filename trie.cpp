@@ -1,10 +1,10 @@
 /*
 This file is the cpp that contains the Trie class' method implementation.
 The Trie class has methods to add words, lookup words, and find words with the same prefix 
-in the trie.
+in the trie, made of a map with character keys and Trie values.
 
 By Nandhini Ramanathan and Ishan Sharma
-February 13, 2025
+February 17, 2025
 */
 
 #include "trie.h"
@@ -19,7 +19,7 @@ Trie::Trie() {
 // Copy contrsuctor
 Trie::Trie(const Trie& other) {
     for (auto branch : other.branches) {
-        branches[branch.first] = branch.second;
+        branches.insert(branch);
     }
     isCompleteWord = other.isCompleteWord;
 }
@@ -42,7 +42,7 @@ void Trie::addWord(const string& word) {
         branches[word[0]] = Trie();
     }
 
-    // Passes the remaining wird recursively (skipping the current character (0) processed)
+    // Passes the remaining word recursively (skipping the current character (0) processed)
     branches[word[0]].addWord(word.substr(1));
 }
 
@@ -86,8 +86,7 @@ vector<string> Trie::allWordsStartingWithPrefixRecursive(const string& prefix) c
 
         auto branchEntry = currentNode->branches.find(character);
 
-        // Determine the index for the current character ('a' = 0 to 'z' = 25)
-        if (branchEntry == branches.end()) {
+        if (branchEntry == currentNode->branches.end()) {
             return {};
         }
         currentNode = &branchEntry->second;
@@ -116,7 +115,7 @@ void Trie::getWords(const Trie* node, string prefix, vector<string>& words) cons
         words.push_back(prefix);
     }
 
-    for (auto branchEntry : node->branches) {
+    for (const auto& branchEntry : node->branches) {
         getWords(&branchEntry.second, prefix + branchEntry.first, words);
     }
 }

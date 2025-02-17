@@ -1,10 +1,10 @@
 /*
 This file is a the header that contains the Trie class with its method declarations.
 The Trie class has methods to add words, lookup words, and find words with the same prefix 
-in the trie.
+in the trie, , made of a map with character keys and Trie values.
 
-By Nandhini Ramanathan
-February 4, 2025
+By Nandhini Ramanathan and Ishan Sharma
+February 17, 2025
 */
 
 #ifndef TRIE_H

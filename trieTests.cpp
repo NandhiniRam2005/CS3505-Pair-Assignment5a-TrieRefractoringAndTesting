@@ -3,7 +3,7 @@
  * It tests all the methods in Trie, including edge cases
  * 
  * By Nandhini Ramanathan and Ishan Sharma
- * February 13, 2025
+ * February 17, 2025
  */
 #include "trie.h"
 #include <gtest/gtest.h>
@@ -14,7 +14,7 @@
  * @param firstVector - First string vector being checked
  * @param secondVector - Second string vector being checked
  */
-bool IsEqualVector(vector<string> firstVector, vector<string> secondVector) {
+bool IsEqualVector(const vector<string>& firstVector, const vector<string>& secondVector) {
     if (firstVector.size() != secondVector.size()){
         return false;
     }
