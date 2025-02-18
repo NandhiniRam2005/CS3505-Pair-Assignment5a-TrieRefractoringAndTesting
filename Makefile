@@ -10,7 +10,7 @@ GOOGLETEST ?= ./googletest
 trieTests: trieTests.o trie.o
 	$(CC) $(CFLAGS) -L$(GOOGLETEST)/lib -o TrieTests trieTests.o trie.o -lgtest -lgtest_main -pthread
 
-trieTests.o: trieTests.cpp trie.cpp trie.h
+trieTests.o: trieTests.cpp trie.h
 	$(CC) $(CFLAGS) -I$(GOOGLETEST)/googletest/include -c trieTests.cpp
 
 trie.o: trie.cpp trie.h
