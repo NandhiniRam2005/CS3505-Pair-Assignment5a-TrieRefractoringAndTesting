@@ -1,5 +1,5 @@
 # This is the Makefile that compiles and executes trieTest with the necesary .o files
-# It also contains a clean command
+# It also contains a clean command.
 # By Nandhini Ramanathan and Ishan Sharma
 # February 17, 2025
 
