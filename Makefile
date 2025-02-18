@@ -7,7 +7,7 @@ CC = g++
 CFLAGS = -Wall -std=c++2a
 GOOGLETEST ?= ./googletest
 
-TrieTests: trieTests.o trie.o
+trieTests: trieTests.o trie.o
 	$(CC) $(CFLAGS) -L$(GOOGLETEST)/lib -o TrieTests trieTests.o trie.o -lgtest -lgtest_main -pthread
 
 trieTests.o: trieTests.cpp trie.cpp trie.h
@@ -16,7 +16,7 @@ trieTests.o: trieTests.cpp trie.cpp trie.h
 trie.o: trie.cpp trie.h
 	$(CC) $(CFLAGS) -c trie.cpp
 
-test: TrieTests
+test: trieTests
 	./TrieTests
 
 clean:
