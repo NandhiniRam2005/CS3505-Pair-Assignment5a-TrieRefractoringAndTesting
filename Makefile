@@ -4,7 +4,7 @@
 # February 17, 2025
 
 CC = g++
-CFLAGS = -Wall -std=c++2a
+CFLAGS = -Wall -std=c++20
 GOOGLETEST ?= ./googletest
 
 TrieTests: trieTests.o trie.o
