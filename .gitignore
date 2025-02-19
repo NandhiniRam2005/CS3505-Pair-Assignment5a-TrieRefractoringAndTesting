@@ -1,5 +1,5 @@
 *.o
 *.a
-googletest/googletest/src
-googletest/lib
+*.json
+googletest/
 TrieTests
