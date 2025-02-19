@@ -7,8 +7,8 @@ CC = g++
 CFLAGS = -Wall -std=c++20
 GOOGLETEST ?= ./googletest
 
-TrieTests: trieTests.o trie.o
-	$(CC) $(CFLAGS) -o TrieTests trieTests.o trie.o -L$(GOOGLETEST)/lib -lgtest -lgtest_main -lpthread
+trieTests: trieTests.o trie.o
+	$(CC) $(CFLAGS) -o trieTests trieTests.o trie.o -L$(GOOGLETEST)/lib -lgtest -lgtest_main -lpthread
 
 trieTests.o: trieTests.cpp
 	$(CC) $(CFLAGS) -c trieTests.cpp -I$(GOOGLETEST)/googletest/include
@@ -16,8 +16,8 @@ trieTests.o: trieTests.cpp
 trie.o: trie.cpp trie.h
 	$(CC) $(CFLAGS) -c trie.cpp
 
-test: TrieTests
-	./TrieTests
+test: trieTests
+	./trieTests
 
 clean:
-	rm -f TrieTests *.o
+	rm -f trieTests *.o
