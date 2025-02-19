@@ -16,7 +16,7 @@ trieTests.o: trieTests.cpp trie.h
 trie.o: trie.cpp trie.h
 	$(CC) $(CFLAGS) -c trie.cpp
 
-test: TrieTests
+trieTests: TrieTests
 	./TrieTests
 
 clean:
