@@ -8,10 +8,10 @@ CFLAGS = -Wall -std=c++2a
 GOOGLETEST ?= ./googletest
 
 TrieTests: trieTests.o trie.o
-	$(CC) $(CFLAGS) -L$(GOOGLETEST)/lib -o TrieTests trieTests.o trie.o -lgtest -lgtest_main -lpthread
+	$(CC) $(CFLAGS) -o TrieTests trieTests.o trie.o -L$(GOOGLETEST)/lib -lgtest -lgtest_main -lpthread
 
-trieTests.o: trieTests.cpp trie.h
-	$(CC) $(CFLAGS) -I$(GOOGLETEST)/googletest/include -c trieTests.cpp
+trieTests.o: trieTests.cpp
+	$(CC) $(CFLAGS) -c trieTests.cpp -I$(GOOGLETEST)/googletest/include
 
 trie.o: trie.cpp trie.h
 	$(CC) $(CFLAGS) -c trie.cpp
