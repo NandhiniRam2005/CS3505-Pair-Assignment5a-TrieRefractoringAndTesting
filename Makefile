@@ -5,7 +5,7 @@
 
 CC = g++
 CFLAGS = -Wall -std=c++20
-GOOGLETEST ?= ./googletest
+GOOGLETEST ?= googletest
 
 trieTests: trieTests.o trie.o
 	$(CC) $(CFLAGS) -o trieTests trieTests.o trie.o -L$(GOOGLETEST)/lib -lgtest -lgtest_main -lpthread

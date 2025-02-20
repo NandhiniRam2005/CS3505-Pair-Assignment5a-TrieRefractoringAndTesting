@@ -29,26 +29,26 @@ bool IsEqualVector(const vector<string>& firstVector, const vector<string>& seco
     return true;
 }
 
-TEST(TrieTest, AddOneWordIsWordTrue) {
+TEST(AddWordTests, AddOneWordIsWordTrue) {
     Trie trie;
     trie.addWord("hello");
     EXPECT_TRUE(trie.isWord("hello")) << "Tried testing addWord with just one word 'hello' and isWord returned false";
 }
 
-TEST(TrieTest, AddOneWordIsWordFalse) {
+TEST(AddWordTests, AddOneWordIsWordFalse) {
     Trie trie;
     trie.addWord("hello");
     EXPECT_FALSE(trie.isWord("hell")) << "Tried testing addWord with just one word 'hello' and isWord('hell') returned true";
 }
 
-TEST(TrieTest, AddDuplicateWordIsWordTrue) {
+TEST(AddWordTests, AddDuplicateWordIsWordTrue) {
     Trie trie;
     trie.addWord("hello");
     trie.addWord("hello");
     EXPECT_TRUE(trie.isWord("hello")) << "Tried testing addWord('hello') twice and isWord('hello') returned false";
 }
 
-TEST(TrieTest, AddMultipleWordsIsWordsTrue) {
+TEST(IsWordTests, AddMultipleWordsIsWordsTrue) {
     Trie trie;
     trie.addWord("hello");
     trie.addWord("hi");
@@ -66,7 +66,7 @@ TEST(TrieTest, AddMultipleWordsIsWordsTrue) {
     EXPECT_FALSE(trie.isWord("monkey")) << "Tried testing isWord('monkey') in a trie with multiple words but not monkey and it returned true";
 }
 
-TEST(TrieTest, AddWordsWithSamePrefixIsWordTrue) {
+TEST(IsWordTests, AddWordsWithSamePrefixIsWordTrue) {
     Trie trie;
     trie.addWord("cats");
     trie.addWord("catastrophe");
@@ -77,18 +77,18 @@ TEST(TrieTest, AddWordsWithSamePrefixIsWordTrue) {
     EXPECT_TRUE(IsEqualVector(expected, actual)) << "Tried testing allWordsStartingWithPrefix('cat') in a trie with 'cats' and a 'catastrophe' and it returned false";                   
 }
 
-TEST(TrieTest, IsWordFalseInEmptyTrie) {
+TEST(IsWordTests, IsWordFalseInEmptyTrie) {
     Trie trie;
     EXPECT_FALSE(trie.isWord("hello")) << "Tried testing isWord('hello') in an empty trie and it returned true";
 }
 
-TEST(TrieTest, IsTrueOneLetterWord) {
+TEST(IsWordTests, IsTrueOneLetterWord) {
     Trie trie;
     trie.addWord("u");
     EXPECT_TRUE(trie.isWord("u")) << "Tried testing one letter input isWord('u') and it returned false";
 }
 
-TEST(TrieTest, IsWordIncompleteVersionsofAddedWord) {
+TEST(IsWordTests, IsWordIncompleteVersionsofAddedWord) {
     Trie trie;
     trie.addWord("positivity");
     trie.addWord("positive");
@@ -97,7 +97,7 @@ TEST(TrieTest, IsWordIncompleteVersionsofAddedWord) {
     EXPECT_FALSE(trie.isWord("pos")) << "Tried testing isWord('pos') in a trie with 'positivity', 'positive', and 'posit' and it returned true";
 }
 
-TEST(TrieTest, AllWordsStartingWithPrefixSameWord) {
+TEST(AllWordsStartingWithPrefixTests, AllWordsStartingWithPrefixSameWord) {
     Trie trie;
     trie.addWord("car");
 
@@ -107,7 +107,7 @@ TEST(TrieTest, AllWordsStartingWithPrefixSameWord) {
     EXPECT_TRUE(IsEqualVector(expected, actual)) << "Tried testing allWordsStartingWithPrefix('car') in a trie with 'car' and it failed";         
 }
 
-TEST(TrieTest, AllWordsStartingWithPrefixNormalCaseMultipleWords) {
+TEST(AllWordsStartingWithPrefixTests, AllWordsStartingWithPrefixNormalCaseMultipleWords) {
     Trie trie;
     trie.addWord("cats");
     trie.addWord("cat");
@@ -122,7 +122,7 @@ TEST(TrieTest, AllWordsStartingWithPrefixNormalCaseMultipleWords) {
     EXPECT_TRUE(IsEqualVector(expected, actual)) << "Tried testing allWordsStartingWithPrefix('cat') in a trie with 'cats', 'cat', 'catra', 'cater', 'catering', and 'caty' and it failed";   
 }
 
-TEST(TrieTest, AllWordsStartingWithPrefixSomeAreFalse) {
+TEST(AllWordsStartingWithPrefixTests, AllWordsStartingWithPrefixSomeAreFalse) {
     Trie trie;
     trie.addWord("cats");
     trie.addWord("cat");
@@ -138,7 +138,7 @@ TEST(TrieTest, AllWordsStartingWithPrefixSomeAreFalse) {
     EXPECT_TRUE(IsEqualVector(expected, actual)) << "Tried testing allWordsStartingWithPrefix('cat') in a trie with 'cats', 'cat', 'catra', 'cater', 'car', 'c', and 'a' and it failed";
 }
 
-TEST(TrieTest, AllWordsStartingWithOneWordPrefix) {   
+TEST(AllWordsStartingWithPrefixTests, AllWordsStartingWithOneWordPrefix) {   
     Trie trie;
     trie.addWord("cats");
     trie.addWord("cat");
@@ -156,20 +156,20 @@ TEST(TrieTest, AllWordsStartingWithOneWordPrefix) {
     EXPECT_TRUE(IsEqualVector(expected, actual)) << "Tried testing allWordsStartingWithPrefix('c') in a trie with 'cats', 'cat', 'catra', 'cater', 'car', 'c', 'case', 'cocktail', and 'a' and it failed";
 }
 
-TEST(TrieTest, IsWordNotAtoZ) {
+TEST(IsWordTests, IsWordNotAtoZ) {
     Trie trie;
     trie.addWord("car1");
              
     EXPECT_FALSE(trie.isWord("car1")) << "Tried testing isWord('car1') in a trie with 'car1' and it returned true";
 }
 
-TEST(TrieTest, IsWordWeirdCharacters) {      
+TEST(IsWordTests, IsWordWeirdCharacters) {      
     Trie trie;
     trie.addWord("paper");
     EXPECT_FALSE(trie.isWord("p@p$^")) << "Tried testing isWord('p@p$^') in a trie with 'paper' and it returned true";
 }
 
-TEST(TrieTest, StartWithPrefixNotAtoZ) {
+TEST(AllWordsStartingWithPrefixTests, StartWithPrefixNotAtoZ) {
     Trie trie;
     trie.addWord("car1");
     
@@ -179,7 +179,7 @@ TEST(TrieTest, StartWithPrefixNotAtoZ) {
     EXPECT_TRUE(IsEqualVector(expected, actual)) << "Tried testing addWord with just one word 'hello' and isWord('hell') returned true";
 }
 
-TEST(TrieTest, StartWithPrefixWeirdCharacters) {
+TEST(AllWordsStartingWithPrefixTests, StartWithPrefixWeirdCharacters) {
     Trie trie;
     trie.addWord("paper");
     
@@ -189,7 +189,7 @@ TEST(TrieTest, StartWithPrefixWeirdCharacters) {
     EXPECT_TRUE(IsEqualVector(expected, actual)) << "Tried testing allWordsStartingWithPrefix('p@p$^') in a trie with 'paper' and it failed";
 }
 
-TEST(TrieTest, PrefixNotAtoZCapitalLetters) {
+TEST(AllWordsStartingWithPrefixTests, PrefixNotAtoZCapitalLetters) {
     Trie trie;
     trie.addWord("paper");
     
@@ -199,14 +199,14 @@ TEST(TrieTest, PrefixNotAtoZCapitalLetters) {
     EXPECT_TRUE(IsEqualVector(expected, actual)) << "Tried testing allWordsStartingWithPrefix('PAPER') in a trie with 'paper' and it failed";
 }
 
-TEST(TrieTest, IsWordNotAtoZCapitalLetters) {
+TEST(IsWordTests, IsWordNotAtoZCapitalLetters) {
     Trie trie;
     trie.addWord("paper");
 
     EXPECT_FALSE(trie.isWord("PAPER")) << "Tried testing isWord('PAPER') in a trie with 'paper' and it returned true";
 }
 
-TEST(TrieTest, IsWordBoundaryCasesAAndZ) {  
+TEST(IsWordTests, IsWordBoundaryCasesAAndZ) {  
     Trie trie;
     trie.addWord("apple");
     trie.addWord("zebra");
@@ -215,7 +215,7 @@ TEST(TrieTest, IsWordBoundaryCasesAAndZ) {
     EXPECT_FALSE(trie.isWord("Zebra")) << "Tried testing isWord('Zebra') in a trie with 'apple' and 'zebra' and it returned true";
 }
 
-TEST(TrieTest, IsWordBoundaryCasesBAndY) { 
+TEST(IsWordTests, IsWordBoundaryCasesBAndY) { 
     Trie trie;
     trie.addWord("bat");
     trie.addWord("yo");
@@ -224,7 +224,7 @@ TEST(TrieTest, IsWordBoundaryCasesBAndY) {
     EXPECT_FALSE(trie.isWord("Yo")) << "Tried testing isWord('Yo') in a trie with 'bat' and 'yo' and it returned true";
 }
 
-TEST(TrieTest, IsWordEdgeCasesAsciiValueRightBeforeAAndZ) {
+TEST(IsWordTests, IsWordEdgeCasesAsciiValueRightBeforeAAndZ) {
     Trie trie;
     trie.addWord("ace");
     trie.addWord("zoom");
@@ -233,7 +233,7 @@ TEST(TrieTest, IsWordEdgeCasesAsciiValueRightBeforeAAndZ) {
     EXPECT_FALSE(trie.isWord("{")) << "Tried testing isWord('{') in a trie with 'ace' and 'zoom' and it returned true";
 }
 
-TEST(TrieTest, StartPrefixBoundaryCasesAAndZ) {     
+TEST(AllWordsStartingWithPrefixTests, StartPrefixBoundaryCasesAAndZ) {     
     Trie trie;
     trie.addWord("apple");
     trie.addWord("zebra");
@@ -246,7 +246,7 @@ TEST(TrieTest, StartPrefixBoundaryCasesAAndZ) {
     EXPECT_EQ(expected, actual2) << "Tried testing if allWordsStartingWithPrefix('Ze') in a trie with 'apple' and 'zebra' was empty and it failed";
 }
 
-TEST(TrieTest, StartPrefixBoundaryCasesBAndY) {     
+TEST(AllWordsStartingWithPrefixTests, StartPrefixBoundaryCasesBAndY) {     
     Trie trie;
     trie.addWord("banana");
     trie.addWord("yolo");
@@ -259,7 +259,7 @@ TEST(TrieTest, StartPrefixBoundaryCasesBAndY) {
     EXPECT_EQ(expected, actual2) << "Tried testing if allWordsStartingWithPrefix('Yo') in a trie with 'banana' and 'yolo' was empty and it failed";
 }
 
-TEST(TrieTest, StartPrefixEdgeCasesAsciiValueRightBeforeAAndZ) {     
+TEST(AllWordsStartingWithPrefixTests, StartPrefixEdgeCasesAsciiValueRightBeforeAAndZ) {     
     Trie trie;
     trie.addWord("ace");
     trie.addWord("zoom");
@@ -272,7 +272,7 @@ TEST(TrieTest, StartPrefixEdgeCasesAsciiValueRightBeforeAAndZ) {
     EXPECT_EQ(expected, actual2) << "Tried testing if allWordsStartingWithPrefix('{') in a trie with 'ace' and 'zoom' was empty and it failed";
 }
 
-TEST(TrieTest, StartWithPrefixNotAtoZCapitalLetters) {    
+TEST(AllWordsStartingWithPrefixTests, StartWithPrefixNotAtoZCapitalLetters) {    
     Trie trie;
     trie.addWord("paper");
 
@@ -282,7 +282,7 @@ TEST(TrieTest, StartWithPrefixNotAtoZCapitalLetters) {
     EXPECT_EQ(expected, actual) << "Tried testing allWordsStartingWithPrefix('Pap') in a trie with 'paper' and it failed";
 }
 
-TEST(TrieTest, StartWithPrefixNotAtoZEmptyStringGetAllWords) {   
+TEST(AllWordsStartingWithPrefixTests, StartWithPrefixNotAtoZEmptyStringGetAllWords) {   
     Trie trie;
     trie.addWord("cats");
     trie.addWord("cat");
@@ -300,7 +300,7 @@ TEST(TrieTest, StartWithPrefixNotAtoZEmptyStringGetAllWords) {
     EXPECT_TRUE(IsEqualVector(expected, actual)) << "Tried testing allWordsStartingWithPrefix('') in a trie with 'cats', 'cat', 'catra', 'cater', 'car', 'c', 'case', 'cocktail', and 'a' and it failed";
 }
 
-TEST(TrieTest, PrefixdNotAtoZEmptyVector) {       
+TEST(AllWordsStartingWithPrefixTests, PrefixdNotAtoZEmptyVector) {       
     Trie trie;
 
     vector<string> expected = {};
@@ -309,7 +309,7 @@ TEST(TrieTest, PrefixdNotAtoZEmptyVector) {
     EXPECT_TRUE(IsEqualVector(expected, actual)) << "Tried testing allWordsStartingWithPrefix('') in an empty trie and it failed";  
 }
 
-TEST(TrieTest, StartWithPrefixTrue) {
+TEST(AllWordsStartingWithPrefixTests, StartWithPrefixTrue) {
     Trie trie;
     trie.addWord("cats");
     
@@ -319,7 +319,7 @@ TEST(TrieTest, StartWithPrefixTrue) {
     EXPECT_TRUE(IsEqualVector(expected, actual)) << "Tried testing allWordsStartingWithPrefix('cat') in a trie with 'cats' and it failed";
 }
 
-TEST(TrieTest, StartWithPrefixNotIncludedEmptyVector) {
+TEST(AllWordsStartingWithPrefixTests, StartWithPrefixNotIncludedEmptyVector) {
     Trie trie;
     trie.addWord("cat");
 
@@ -329,7 +329,7 @@ TEST(TrieTest, StartWithPrefixNotIncludedEmptyVector) {
     EXPECT_TRUE(IsEqualVector(expected, actual)) << "Tried testing allWordsStartingWithPrefix('cats') in a trie with 'cat' and it failed";
 }
 
-TEST(TrieTest, CopyConstructorIsWordTrue) {
+TEST(CopyConstructorTests, CopyConstructorIsWordTrue) {
     Trie trie1;
     trie1.addWord("cats");
     trie1.addWord("cat");
@@ -344,7 +344,7 @@ TEST(TrieTest, CopyConstructorIsWordTrue) {
     EXPECT_TRUE(IsEqualVector(expected, actual)) << "Tried testing copy constructor, trie2 contained changes made to trie1";
 }
 
-TEST(TrieTest, CopyConstructorEmptyTrie) {
+TEST(CopyConstructorTests, CopyConstructorEmptyTrie) {
     Trie trie1;
 
     Trie trie2(trie1);
@@ -357,7 +357,7 @@ TEST(TrieTest, CopyConstructorEmptyTrie) {
     EXPECT_TRUE(IsEqualVector(expected, actual2)) << "Tried testing copy constructor, trie2 coudln't copy empty";
 }
 
-TEST(TrieTest, CopyConstructorIsWordFalse) {
+TEST(CopyConstructorTests, CopyConstructorIsWordFalse) {
     Trie trie1;
     trie1.addWord("cats");
     trie1.addWord("cat");
@@ -372,7 +372,7 @@ TEST(TrieTest, CopyConstructorIsWordFalse) {
     EXPECT_FALSE(IsEqualVector(expected, actual)) << "Tried testing copy constructor, trie1 contained changes made to trie2";
 }
 
-TEST(TrieTest, AssignmentOperatorIsWordTrue) {
+TEST(AssignmentOperatorTests, AssignmentOperatorIsWordTrue) {
     Trie trie1;
     trie1.addWord("cats");
     trie1.addWord("cat");
@@ -388,7 +388,7 @@ TEST(TrieTest, AssignmentOperatorIsWordTrue) {
     EXPECT_TRUE(IsEqualVector(expected, actual)) << "Tried testing allWordsStartingWithPrefix('cat') in a trie with 'cats', 'cat', and 'cater' and it failed";
 }
 
-TEST(TrieTest, AssignmentOperatorEmptyTrie) {
+TEST(AssignmentOperatorTests, AssignmentOperatorEmptyTrie) {
     Trie trie1;
 
     Trie trie2;
@@ -402,7 +402,7 @@ TEST(TrieTest, AssignmentOperatorEmptyTrie) {
     EXPECT_TRUE(IsEqualVector(expected, actual2)) << "Tried testing allWordsStartingWithPrefix('') in an empty trie and it failed";
 }
 
-TEST(TrieTest, AssignmentOperatorIsWordFalse) {
+TEST(AssignmentOperatorTests, AssignmentOperatorIsWordFalse) {
     Trie trie1;
     trie1.addWord("cats");
     trie1.addWord("cat");
